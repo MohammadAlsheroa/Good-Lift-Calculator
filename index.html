@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Good Lift Calculator</title>
+</head>
+<body>
+    <h1>Calculate your Good Lift Points</h1>
+        <h4>What is your Genda?</h4>
+        <input type="radio" name ="c" value="male" >male</input>
+        <input type="radio" name ="c" value="female">female</input>
+        <h4>Enter your Total weight lifted in each lift?(SBD)</h4>
+        <input type="number"></input>
+        <h4>How much did you weight when you got this total?</h4>
+        <input type="number"></input>
+        <br>
+        <br>
+        <button type="button" onclick="myfunc()">
+            Submit
+        </button>
+        <br>
+        <br>
+        <div id="result"></div>
+
+<script>
+    function myfunc(){
+            document.getElementById("result").innerHTML = "";
+            var e = document.getElementsByTagName('input');
+            for (i = 0; i < e.length; i++)
+            {
+                if(e[i].type == "radio")
+                {
+                    if(e[i].checked)
+                    {
+                        document.getElementById("result").innerHTML +=" Value: "+ e[i].value + "<br>";
+                    }
+                }
+                else if(e[i].type == "number")
+                {
+                    document.getElementById("result").innerHTML +=" Value: "+ e[i].value + "<br>";
+                }
+                }
+                }
+</script>
+</body>
+</html>
