@@ -17,7 +17,7 @@
         <input type="number"></input>
         <br>
         <br>
-        <button type="button" onclick="myfunc()">
+        <button type="button" onclick="submit()">
             Submit
         </button>
         <br>
@@ -25,24 +25,31 @@
         <div id="result"></div>
 
 <script>
-    function myfunc(){
+    function real(value){
+        return value != undefined;
+    }
+    function submit(){
             document.getElementById("result").innerHTML = "";
-            var e = document.getElementsByTagName('input');
+            const list = []
+            const e = document.getElementsByTagName('input');
             for (i = 0; i < e.length; i++)
             {
                 if(e[i].type == "radio")
                 {
                     if(e[i].checked)
                     {
-                        document.getElementById("result").innerHTML +=" Value: "+ e[i].value + "<br>";
+                        document.getElementById("result").innerHTML +="Value: "+ e[i].value + "<br>";
+                        list[i] = e[i].value
                     }
                 }
                 else if(e[i].type == "number")
                 {
-                    document.getElementById("result").innerHTML +=" Value: "+ e[i].value + "<br>";
+                    document.getElementById("result").innerHTML +="Value: "+ e[i].value + "<br>";
+                    list[i] = e[i].value
                 }
                 }
-                }
+                document.getElementById("result").innerHTML += "List: " + list.filter(real);
+            }
 </script>
 </body>
 </html>
