@@ -7,11 +7,17 @@
     <title>Good Lift Calculator</title>
 </head>
 <body>
+    <div id="box">
     <h1>Calculate your Good Lift Points</h1>
         <h4>What is your Genda?</h4>
-        <input type="radio" name ="c" value="male" >male</input>
-        <input type="radio" name ="c" value="female">female</input>
-        <h4>Enter your Total weight lifted in each lift?(SBD)</h4>
+        <input type="radio" name ="c" value="Male">Male</input>
+        <input type="radio" name ="c" value="Female">Female</input>
+        <h4>Type of Comp</h4>
+        <input type="radio" name ="m" value="Full-Equipped" >Full Equipped</input>
+        <input type="radio" name ="m" value="Full-Classic">Full Classic</input>
+        <input type="radio" name ="m" value="Bench-Equipped" >Bench Equipped</input>
+        <input type="radio" name ="m" value="Bench-Classic">Bench Classic</input>        
+        <h4>Enter your Total of the highest weight lifted in each lift?</h4>
         <input type="number"></input>
         <h4>How much did you weight when you got this total?</h4>
         <input type="number"></input>
@@ -23,6 +29,8 @@
         <br>
         <br>
         <div id="result"></div>
+        </div>
+        <a href="https://github.com/MohammadAlsheroa/Good-Lift-Calculator" target="_blank"><button type="button">Source Code</button></a>
 
 <script>
     function real(value){
@@ -30,26 +38,85 @@
     }
     function submit(){
             document.getElementById("result").innerHTML = "";
-            const list = []
+            var list = [];
+            var A,B,C = 0;
             const e = document.getElementsByTagName('input');
             for (i = 0; i < e.length; i++)
             {
-                if(e[i].type == "radio")
+                if(e[i].type == "radio"&& e[i].checked)
                 {
-                    if(e[i].checked)
-                    {
-                        document.getElementById("result").innerHTML +="Value: "+ e[i].value + "<br>";
                         list[i] = e[i].value
-                    }
                 }
-                else if(e[i].type == "number")
+                else if(e[i].type == "number" && e[i].value > 0)
                 {
-                    document.getElementById("result").innerHTML +="Value: "+ e[i].value + "<br>";
                     list[i] = e[i].value
                 }
-                }
-                document.getElementById("result").innerHTML += "List: " + list.filter(real);
             }
+            list = list.filter(real);
+            if(list.length < 4){
+                alert("Please fill out all fields pls")
+            }
+            var m_fe = (list[0] == "Male" && list[1] == "Full-Equipped");
+            var f_fe = (list[0] == "Female" && list[1] == "Full-Equipped");
+            var m_fc = (list[0] == "Male" && list[1] == "Full-Classic");
+            var f_fc = (list[0] == "Female" && list[1] == "Full-Classic");
+            var m_be = (list[0] == "Male" && list[1] == "Bench-Equipped");
+            var f_be = (list[0] == "Female" && list[1] == "Bench-Classic");
+            var m_bc = (list[0] == "Male" && list[1] == "Bench-Classic");
+            var f_bc = (list[0] == "Female" && list[1] == "Bench-Classic");
+            if(m_fe)
+            {
+                A = 1236.25115;
+                B = 1449.21864;
+                C = 0.01644;
+            }
+            else if(f_fe)
+            {
+                A = 758.63878;
+                B = 949.31382;
+                C = 0.02435;
+            }
+            else if(m_fc)
+            {
+                A = 1199.72839;
+                B = 1025.18162;
+                C = 0.00921;
+            }
+            else if(f_fc)
+            {
+                A = 610.32796;
+                B = 1045.59282;
+                C = 0.03048;
+            }
+            else if(m_be)
+            {
+                A = 381.22073;
+                B = 733.79378;
+                C = 0.02398;
+            }
+            else if(f_be)
+            {
+                A = 221.82209;
+                B = 357.00377;
+                C = 0.02937;
+            }
+            else if(m_bc)
+            {
+                A = 320.98041;
+                B = 281.40258;
+                C = 0.01008;
+            }
+            else if(f_bc)
+            {
+                A = 142.40398;
+                B = 442.52671;
+                C = 0.04724;
+            }
+            var GLP = (100/(A - (B*Math.pow(Math.exp(1),((-C)*list[3])))))* list[2];
+            if(list.length == 4){
+                document.getElementById("result").innerHTML += "GLP: " + GLP.toFixed(2); +"<br>";
+            }
+        }
 </script>
 </body>
 </html>
