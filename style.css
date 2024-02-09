@@ -27,13 +27,13 @@ h1,h2{
     text-align: center;
 }
 
-@media only screen and (max-height: 660px) {
+@media only screen and (min-width: 390px) {
     #box {
         width: 90%;
     }
 }
 
-@media only screen and (max-width: 550px){
+@media only screen and (min-height: 844px){
     #box{
         height: 70%;
     }
